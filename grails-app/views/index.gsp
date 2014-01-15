@@ -10,13 +10,13 @@
 	<g:form>
 	<div>
 	<div class="create">
-	<g:link controller="CreateUser"><g:message code="index.createUser"/></g:link>
+	<g:link controller="User" class="create" action="create"><g:message code="index.createUser"/></g:link>
 	</div>
 	<div class="log">
 	<g:link controller="Authentication"><g:message code="index.log"/></g:link>
 	</div>
 	<div class="topic">
-	<g:link controller="CreateTopic"><g:message code="index.createTopic"/></g:link>
+	<g:link controller="Topic"><g:message code="index.createTopic"/></g:link>
 	</div>
 	</div>
 	</g:form>

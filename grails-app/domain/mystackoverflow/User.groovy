@@ -20,4 +20,9 @@ class User {
 		login size: 5..15, blank: false, unique: true
 		passwordHash blank: false
     }
+
+	@Override
+	String toString() {
+		return ((name ?: "") + " " + (firstName ?: ""));
+	}
 }

@@ -9,4 +9,9 @@ class Message {
     static constraints = {
     }
 	Message(){}
+	
+	@Override
+	String toString() {
+		return ((body ?: ""));
+	}
 }

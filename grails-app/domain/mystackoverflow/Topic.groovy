@@ -6,4 +6,9 @@ class Topic {
 	static belongsTo = [author:User]
     static constraints = {
     }
+	
+	@Override
+	String toString() {
+		return ((title ?: ""));
+	}
 }
