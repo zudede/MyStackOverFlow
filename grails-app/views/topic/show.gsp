@@ -62,6 +62,15 @@
 					
 				</li>
 				</g:if>
+				
+				<g:if test="${topicInstance?.question}">
+				<li class="questioncontain">
+					<span id="question-label" class="property-label"><g:message code="topic.question.label" default="Question" /></span>
+					
+						<span class="property-value" aria-labelledby="question-label"><g:fieldValue bean="${topicInstance}" field="question"/></span>
+					
+				</li>
+				</g:if>
 			
 			</ol>
 			<g:form url="[resource:topicInstance, action:'delete']" method="DELETE">

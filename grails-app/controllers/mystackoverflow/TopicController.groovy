@@ -20,21 +20,31 @@ class TopicController {
     }
 
     def create() {
-        respond new Topic(params)
+        //respond new Topic(params)
+		Topic topic = new Topic(params)
+		topic.author =  User.get(session["user"])
+		topic.creationDate = new Date()
+		render (view: "create", model:[topicInstance:topic])
     }
 
     @Transactional
-    def save(Topic topicInstance) {
-        if (topicInstance == null) {
+    def save(Topic topicInstance, Message messageInstance) {
+        
+		if (topicInstance == null) {
             notFound()
             return
-        }
-
+		}
+		
+		def author = User.get(session["user"])
+		topicInstance.author= User.get(session["user"])
+		topicInstance.creationDate = new Date()
+		
         if (topicInstance.hasErrors()) {
             respond topicInstance.errors, view:'create'
             return
         }
 
+		
         topicInstance.save flush:true
 
         request.withFormat {

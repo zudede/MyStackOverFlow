@@ -3,6 +3,9 @@ package mystackoverflow
 
 
 import static org.springframework.http.HttpStatus.*
+
+import org.springframework.web.servlet.view.RedirectView;
+
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -91,7 +94,29 @@ class UserController {
             '*'{ render status: NO_CONTENT }
         }
     }
-
+	
+	def connect() {
+		render (view: "login", model:[userInstance:new User(params)])
+	}
+	
+	def login(User userInstance) {
+		String login = userInstance.login
+		String password = userInstance.passwordHash
+		def user = User.findByLogin(login)
+		if(user) {
+			if (password.equals(user.passwordHash)) {
+				//connexion
+				session["user"]=user.id
+				redirect uri:""
+			}
+			else {
+				render view:"login", model:[authenticationFailed:true]
+			} 
+		} else {
+			render view:"login", model:[authenticationFailed:true]
+		}
+	}
+	
     protected void notFound() {
         request.withFormat {
             form {

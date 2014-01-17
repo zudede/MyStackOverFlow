@@ -24,9 +24,13 @@
 			<thead>
 					<tr>
 					
-						<th><g:message code="topic.author.label" default="Author" /></th>
-					
 						<g:sortableColumn property="title" title="${message(code: 'topic.title.label', default: 'Title')}" />
+		
+
+						<th><g:message code="topic.author.label" default="Author" /></th>
+						
+						
+						<th><g:message code="topic.creationDate.label" default="Creation Date" /></th>
 					
 					</tr>
 				</thead>
@@ -34,9 +38,11 @@
 				<g:each in="${topicInstanceList}" status="i" var="topicInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "author")}</g:link></td>
+						<td><g:link action="show" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "title")}</g:link></td>
 					
-						<td>${fieldValue(bean: topicInstance, field: "title")}</td>
+						<td><g:link action="show" controller="User" id="${topicInstance.author.id}">${fieldValue(bean: topicInstance, field: "author")}</g:link></td>
+						
+						<td><g:formatDate format="dd-MM-yyyy HH:mm" date="${topicInstance.creationDate}" /></td>
 					
 					</tr>
 				</g:each>

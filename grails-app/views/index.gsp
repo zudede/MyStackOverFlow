@@ -13,7 +13,7 @@
 	<g:link controller="User" class="create" action="create"><g:message code="index.createUser"/></g:link>
 	</div>
 	<div class="log">
-	<g:link controller="Authentication"><g:message code="index.log"/></g:link>
+	<g:link controller="User" action="connect"><g:message code="index.log"/></g:link>
 	</div>
 	<div class="topic">
 	<g:link controller="Topic"><g:message code="index.createTopic"/></g:link>
