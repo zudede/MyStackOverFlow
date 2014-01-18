@@ -20,7 +20,8 @@ class MessageController {
     }
 
     def create() {
-        respond new Message(params)
+       // respond new Message(params)
+		render (view: "create", model:[messageInstance:new Message(params), 'topic.id': params["topic.id"]])
     }
 
     @Transactional

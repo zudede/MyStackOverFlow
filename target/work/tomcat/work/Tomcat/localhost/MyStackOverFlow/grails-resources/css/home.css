@@ -10,14 +10,19 @@ h1 {
 	margin: 0.8em 0 0.3em 0;
 }
 
+.userList {
+	width: 10%;
+	float: left;
+	text-align:left;
+}
+
 .create {
-    width: 15%;
+    width: 70px;
     float: left;
-    text-align: left;
 }
 
 .topic {
-    width: 15%;
+    width: 12%;
     float: left;
     text-align: left;
 }

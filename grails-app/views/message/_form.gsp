@@ -1,7 +1,7 @@
 <%@ page import="mystackoverflow.Message" %>
 
 
-
+<g:set var="messageInstance.topic.id" value="${params.topic.id}" />
 <div class="fieldcontain ${hasErrors(bean: messageInstance, field: 'author', 'error')} required">
 	<label for="author">
 		<g:message code="message.author.label" default="Author" />
