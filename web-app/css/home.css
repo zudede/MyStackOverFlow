@@ -11,13 +11,13 @@ h1 {
 }
 
 .create {
-    width: 12%;
+    width: 15%;
     float: left;
     text-align: left;
 }
 
-.log {
-    width: 12%;
+.topic {
+    width: 15%;
     float: left;
     text-align: left;
 }

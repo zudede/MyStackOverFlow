@@ -73,10 +73,15 @@
 				</g:if>
 			
 			</ol>
+			<g:if test="${session.user != null}">
+			<g:link controller="message" action="create" params="['topic.id': topicInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'message.label', default: 'Message')])}</g:link>
+			</g:if>
 			<g:form url="[resource:topicInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
+					<g:if test="${session.user == topicInstance.author.id }">
 					<g:link class="edit" action="edit" resource="${topicInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					</g:if>
 				</fieldset>
 			</g:form>
 		</div>

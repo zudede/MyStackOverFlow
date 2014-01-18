@@ -10,6 +10,8 @@ class Message {
 	static hasMany = [comments: Comment]
 	static belongsTo = [author:User, topic:Topic]
     static constraints = {
+		creationDate nullable: true
+		author nullable: true
     }
 	Message(){}
 	

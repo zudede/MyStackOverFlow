@@ -12,12 +12,17 @@
 	<div class="create">
 	<g:link controller="User" class="create" action="create"><g:message code="index.createUser"/></g:link>
 	</div>
-	<div class="log">
-	<g:link controller="User" action="connect"><g:message code="index.log"/></g:link>
-	</div>
 	<div class="topic">
 	<g:link controller="Topic"><g:message code="index.createTopic"/></g:link>
 	</div>
+	<g:if test="${session.user == null }">
+	<div class="log">
+	<g:link controller="User" action="connect"><g:message code="index.log"/></g:link>
+	</div>
+	</g:if>
+	<g:else>
+	<g:link controller="User" action="disconnect"><g:message code="index.logout"/></g:link>
+	</g:else>
 	</div>
 	</g:form>
 	</body>

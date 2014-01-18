@@ -99,6 +99,11 @@ class UserController {
 		render (view: "login", model:[userInstance:new User(params)])
 	}
 	
+	def disconnect() {
+		session["user"]=null
+		redirect uri:""
+	}
+	
 	def login(User userInstance) {
 		String login = userInstance.login
 		String password = userInstance.passwordHash

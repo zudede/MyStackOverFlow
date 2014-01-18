@@ -10,6 +10,7 @@ class Topic {
 	static belongsTo = [author:User]
     static constraints = {
 		creationDate nullable: true
+		author nullable: true
     }
 	
 	@Override
