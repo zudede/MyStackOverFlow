@@ -28,7 +28,7 @@ class TopicController {
     }
 
     @Transactional
-    def save(Topic topicInstance, Message messageInstance) {
+    def save(Topic topicInstance) {
         
 		if (topicInstance == null) {
             notFound()
@@ -38,7 +38,8 @@ class TopicController {
 		def author = User.get(session["user"])
 		topicInstance.author= User.get(session["user"])
 		topicInstance.creationDate = new Date()
-		
+		topicInstance.rate = 0
+		topicInstance.validate()
         if (topicInstance.hasErrors()) {
             respond topicInstance.errors, view:'create'
             return

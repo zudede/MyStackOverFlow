@@ -29,6 +29,7 @@
 
 						<th><g:message code="topic.author.label" default="Author" /></th>
 						
+						<th><g:message code="topic.rate.label" default="Rate" /></th>
 						
 						<th><g:message code="topic.creationDate.label" default="Creation Date" /></th>
 					
@@ -41,6 +42,8 @@
 						<td><g:link action="show" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "title")}</g:link></td>
 					
 						<td><g:link action="show" controller="User" id="${topicInstance.author.id}">${fieldValue(bean: topicInstance, field: "author")}</g:link></td>
+						
+						<td>${fieldValue(bean: topicInstance, field: "rate")}</td>
 						
 						<td><g:formatDate format="dd-MM-yyyy HH:mm" date="${topicInstance.creationDate}" /></td>
 					

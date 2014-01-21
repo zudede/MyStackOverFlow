@@ -20,8 +20,11 @@ class MessageController {
     }
 
     def create() {
-       // respond new Message(params)
-		render (view: "create", model:[messageInstance:new Message(params), 'topic.id': params["topic.id"]])
+		Message message = new Message(params)
+		message.topic = Topic.get(params["topic.id"])
+		respond(message)
+        //respond new Message(params)
+		//render (view: "create", model:[messageInstance:new Message(params), 'topic.id': params["topic.id"]])
     }
 
     @Transactional
@@ -31,6 +34,10 @@ class MessageController {
             return
         }
 
+		messageInstance.author = User.get(session["user"])
+		messageInstance.rate = 0
+		messageInstance.validate()
+		
         if (messageInstance.hasErrors()) {
             respond messageInstance.errors, view:'create'
             return

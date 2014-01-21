@@ -1,15 +1,5 @@
 <%@ page import="mystackoverflow.Message" %>
 
-
-<g:set var="messageInstance.topic.id" value="${params.topic.id}" />
-<div class="fieldcontain ${hasErrors(bean: messageInstance, field: 'author', 'error')} required">
-	<label for="author">
-		<g:message code="message.author.label" default="Author" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="author" name="author.id" from="${mystackoverflow.User.list()}" optionKey="id" required="" value="${messageInstance?.author?.id}" class="many-to-one"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: messageInstance, field: 'body', 'error')} ">
 	<label for="body">
 		<g:message code="message.body.label" default="Body" />
@@ -34,6 +24,8 @@
 </ul>
 
 </div>
+
+<<g:hiddenField name="topic.id" value="${messageInstance?.topic?.id}"/>
 <!-- 
 <div class="fieldcontain ${hasErrors(bean: messageInstance, field: 'topic', 'error')} required">
 	<label for="topic">
@@ -41,5 +33,5 @@
 		<span class="required- indicator">*</span>
 	</label>
 	<g:select id="topic" name="topic.id" from="${mystackoverflow.Topic.list()}" optionKey="id" required="" value="${messageInstance?.topic?.id}" class="many-to-one"/>
-</div>
- -->
+</div>  -->
+ 
