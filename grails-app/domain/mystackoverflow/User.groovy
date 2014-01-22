@@ -12,6 +12,7 @@ class User {
 	String pseudo;
 	boolean isModerator;
 	boolean isAdmin;
+	boolean isBlocked;
 	int score;
 	static hasMany = [rewards:Reward, topics:Topic, messages:Message, comments:Comment]
 	

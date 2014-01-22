@@ -5,6 +5,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'topic.label', default: 'Topic')}" />
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'topic.css')}" type="text/css">
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -17,21 +18,23 @@
 			</ul>
 		</div>
 		<div id="show-topic" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<g:if test="${topicInstance?.title}">
+			<h1><g:fieldValue bean="${topicInstance}" field="title"/></h1>
+			</g:if>	
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			
 			<ol class="property-list topic">
-			
-				<g:if test="${topicInstance?.title}">
-				<li class="fieldcontain">
-					<span id="title-label" class="property-label"><g:message code="topic.title.label" default="Title" /></span>
-					
-						<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${topicInstance}" field="title"/></span>
-					
-				</li>
-				</g:if>			
-			
+
+				<g:if test="${topicInstance?.question}">	
+				<div id="message">			
+				<g:fieldValue bean="${topicInstance}" field="question"/>
+				</div>
+				</g:if>
+				
+				
+				
 				<g:if test="${topicInstance?.author}">
 				<li class="fieldcontain">
 					<span id="author-label" class="property-label"><g:message code="topic.author.label" default="Author" /></span>
@@ -41,14 +44,7 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${topicInstance?.question}">
-				<li class="fieldcontain">
-					<span id="question-label" class="property-label"><g:message code="topic.question.label" default="Question" /></span>
-					
-						<span class="property-value" aria-labelledby="question-label"><g:fieldValue bean="${topicInstance}" field="question"/></span>
-					
-				</li>
-				</g:if>
+				
 			
 				<g:if test="${topicInstance?.messages}">
 				<li class="fieldcontain">

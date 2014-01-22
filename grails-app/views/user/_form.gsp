@@ -67,5 +67,16 @@
 	<g:hiddenField name="isModerator" value='false'/>
 	</g:else>
 </div>
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'isBlocked', 'error')} ">
+	<g:if test="${session.administrator==true }">
+	<label for="isBlocked">
+		<g:message code="user.blocked.label" default="Blocked" />
+	</label>
+		<g:checkBox name="isBlocked" value="${userInstance?.isBlocked }"/>
+	</g:if>
+	<g:else>
+	<g:hiddenField name="isBlocked" value='false'/>
+	</g:else>
+</div>
 
 

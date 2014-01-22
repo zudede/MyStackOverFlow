@@ -111,7 +111,16 @@ class UserController {
 		String password = userInstance.passwordHash
 		def user = User.findByLogin(login)
 		if(user) {
-			if (password.equals(user.passwordHash)) {
+			if (user.isBlocked)
+			{
+				request.withFormat {
+					form {
+						flash.message = message(code:'user.isblocked')	
+						redirect action:"connect", method: "GET"
+					}
+				}
+			}
+			else if (password.equals(user.passwordHash)) {
 				//connexion
 				session["user"]=user.id
 				session["moderator"]=user.isModerator
@@ -119,7 +128,12 @@ class UserController {
 				redirect uri:""
 			}
 			else {
-				render view:"login", model:[authenticationFailed:true]
+				request.withFormat {
+					form {
+						flash.message = message(code:'user.wrongPassword')
+						redirect action:"connect", method: "GET"
+					}
+				}
 			} 
 		} else {
 			render view:"login", model:[authenticationFailed:true]

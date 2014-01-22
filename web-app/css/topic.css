@@ -4,22 +4,12 @@ input, select, textarea {
 }
 
 h1 {
-	color: #707070;
+	color: #3CB371;
 	font-weight: normal;
 	font-size: 1.30em;
 	margin: 0.8em 0 0.3em 0;
 }
 
-.label {
-    width: 15%;
-    float: left;
-    text-align: left;
-}
-
-.field {
-    width: 90%;
-}
-
-.textarea {
-	width: 32px;
+#message {
+	margin-left: 5%;
 }
