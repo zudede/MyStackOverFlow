@@ -1,0 +1,25 @@
+body,
+input, select, textarea {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+h1 {
+	color: #707070;
+	font-weight: normal;
+	font-size: 1.30em;
+	margin: 0.8em 0 0.3em 0;
+}
+
+.label {
+	/*width: 30%;
+    float: left;
+    text-align: right;
+    margin-left : 5px;*/
+    width: 10%;
+    float: left;
+    text-align: left;
+}
+
+.field {
+    width: 90%;
+}
