@@ -23,11 +23,29 @@
 			</g:if>
 			<ol class="property-list topic">
 			
+				<g:if test="${topicInstance?.title}">
+				<li class="fieldcontain">
+					<span id="title-label" class="property-label"><g:message code="topic.title.label" default="Title" /></span>
+					
+						<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${topicInstance}" field="title"/></span>
+					
+				</li>
+				</g:if>			
+			
 				<g:if test="${topicInstance?.author}">
 				<li class="fieldcontain">
 					<span id="author-label" class="property-label"><g:message code="topic.author.label" default="Author" /></span>
 					
 						<span class="property-value" aria-labelledby="author-label"><g:link controller="user" action="show" id="${topicInstance?.author?.id}">${topicInstance?.author?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${topicInstance?.question}">
+				<li class="fieldcontain">
+					<span id="question-label" class="property-label"><g:message code="topic.question.label" default="Question" /></span>
+					
+						<span class="property-value" aria-labelledby="question-label"><g:fieldValue bean="${topicInstance}" field="question"/></span>
 					
 				</li>
 				</g:if>
@@ -54,31 +72,15 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${topicInstance?.title}">
-				<li class="fieldcontain">
-					<span id="title-label" class="property-label"><g:message code="topic.title.label" default="Title" /></span>
-					
-						<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${topicInstance}" field="title"/></span>
-					
-				</li>
-				</g:if>
-				
-				<g:if test="${topicInstance?.question}">
-				<li class="questioncontain">
-					<span id="question-label" class="property-label"><g:message code="topic.question.label" default="Question" /></span>
-					
-						<span class="property-value" aria-labelledby="question-label"><g:fieldValue bean="${topicInstance}" field="question"/></span>
-					
-				</li>
-				</g:if>
 			
 			</ol>
 			<g:if test="${session.user != null}">
 			<g:link controller="message" action="create" params="['topic.id': topicInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'message.label', default: 'Message')])}</g:link>
 			</g:if>
+
 			<g:form url="[resource:topicInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
-					<g:if test="${session.user == topicInstance.author.id }">
+					<g:if test="${session.user == topicInstance.author.id || session.moderator == true }">
 					<g:link class="edit" action="edit" resource="${topicInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 					</g:if>

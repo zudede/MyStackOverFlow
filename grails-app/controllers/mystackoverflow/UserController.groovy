@@ -101,6 +101,8 @@ class UserController {
 	
 	def disconnect() {
 		session["user"]=null
+		session["moderator"]=null
+		session["administrator"]=null
 		redirect uri:""
 	}
 	
@@ -112,6 +114,8 @@ class UserController {
 			if (password.equals(user.passwordHash)) {
 				//connexion
 				session["user"]=user.id
+				session["moderator"]=user.isModerator
+				session["administrator"]=user.isAdmin
 				redirect uri:""
 			}
 			else {

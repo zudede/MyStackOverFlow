@@ -22,6 +22,26 @@
 			</g:if>
 			<ol class="property-list user">
 			
+				<g:if test="${userInstance.isAdmin==true}">
+					<li class="fieldcontain">
+					<span id="role-label" class="property-label"><g:message code="user.role.label" default="Role" /></span>
+					
+						<span class="property-value" aria-labelledby="role-label"><g:message code="user.role.admin" default="Administrator"/></span>
+					
+					</li>
+				</g:if>
+				<g:else>
+				<g:if test="${userInstance.isModerator==true}">
+					<li class="fieldcontain">
+					<span id="role-label" class="property-label"><g:message code="user.role.label" default="Role" /></span>
+					
+						<span class="property-value" aria-labelledby="role-label"><g:message code="user.role.moderator" default="Moderator"/></span>
+					
+					</li>
+				</g:if>
+				</g:else>
+				
+				
 				<g:if test="${userInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="user.name.label" default="Name" /></span>
@@ -132,7 +152,7 @@
 			</ol>
 			<g:form url="[resource:userInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
-					<g:if test="${session.user == userInstance.id }">
+					<g:if test="${session.user == userInstance.id  || session.administrator==true}">
 					<g:link class="edit" action="edit" resource="${userInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					</g:if>
 					<!--<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /> -->

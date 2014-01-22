@@ -10,6 +10,8 @@ class User {
 	String login;
 	String passwordHash;
 	String pseudo;
+	boolean isModerator;
+	boolean isAdmin;
 	int score;
 	static hasMany = [rewards:Reward, topics:Topic, messages:Message, comments:Comment]
 	

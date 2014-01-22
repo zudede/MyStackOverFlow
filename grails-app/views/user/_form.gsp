@@ -56,4 +56,16 @@
 	</label>
 	<g:textField name="pseudo" value="${userInstance?.pseudo}"/>
 </div>
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'isModerator', 'error')} ">
+	<g:if test="${session.administrator==true }">
+	<label for="isModerator">
+		<g:message code="user.moderator.label" default="Moderator" />
+	</label>
+		<g:checkBox name="isModerator" value="${userInstance?.isModerator }"/>
+	</g:if>
+	<g:else>
+	<g:hiddenField name="isModerator" value='false'/>
+	</g:else>
+</div>
+
 

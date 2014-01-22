@@ -73,8 +73,10 @@
 			</ol>
 			<g:form url="[resource:messageInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
+					<g:if test="${session.user == messageInstance.author.id || session.moderator == true }">
 					<g:link class="edit" action="edit" resource="${messageInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					</g:if>
 				</fieldset>
 			</g:form>
 		</div>

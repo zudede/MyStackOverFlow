@@ -25,7 +25,7 @@
 
 </div>
 
-<<g:hiddenField name="topic.id" value="${messageInstance?.topic?.id}"/>
+<g:hiddenField name="topic.id" value="${messageInstance?.topic?.id}"/>
 <!-- 
 <div class="fieldcontain ${hasErrors(bean: messageInstance, field: 'topic', 'error')} required">
 	<label for="topic">
