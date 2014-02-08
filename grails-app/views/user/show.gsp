@@ -21,6 +21,10 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list user">
+				<g:if test="${userInstance.isBlocked==true}">
+					<h3><g:message code="user.blocked.label" default="This user is blocked" /></h3> 	
+				</g:if>
+			
 			
 				<g:if test="${userInstance.isAdmin==true}">
 					<li class="fieldcontain">
@@ -92,7 +96,7 @@
 					<span id="comments-label" class="property-label"><g:message code="user.comments.label" default="Comments" /></span>
 					
 						<g:each in="${userInstance.comments}" var="c">
-						<span class="property-value" aria-labelledby="comments-label"><g:link controller="comment" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="comments-label"><g:link controller="topic" action="show" id="${c.message.topic.id}">${c?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
@@ -103,7 +107,7 @@
 					<span id="messages-label" class="property-label"><g:message code="user.messages.label" default="Messages" /></span>
 					
 						<g:each in="${userInstance.messages}" var="m">
-						<span class="property-value" aria-labelledby="messages-label"><g:link controller="message" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="messages-label"><g:link controller="topic" action="show" id="${m.topic.id}">${m?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

@@ -1,12 +1,17 @@
 package mystackoverflow
 
 import java.util.Date;
+import java.util.List;
 
 class Comment {
 	String body;
-	int rate;
 	Date creationDate;
 	static belongsTo = [author:User, message: Message]
     static constraints = {
     }
+	
+	@Override
+	String toString() {
+		return ((body ?: ""));
+	}
 }

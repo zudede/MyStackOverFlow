@@ -12,9 +12,11 @@
 	<div class="userList">
 	<g:link controller="User"><g:message code="index.listUser" default="User List"/></g:link>
 	</div>
+	<g:if test="${session.user != null }">
 	<div class="topic">
 	<g:link controller="Topic" action="create"><g:message code="index.createTopic"/></g:link>
 	</div>
+	</g:if>
 	<g:if test="${session.user == null }">
 	<div class="create">
 	<g:link controller="User" class="create" action="create"><g:message code="index.createUser"/></g:link>

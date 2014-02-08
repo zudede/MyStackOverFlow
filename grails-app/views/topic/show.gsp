@@ -17,71 +17,86 @@
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
+		<g:if test="${flash.message}">
+			<div class="message" role="status">${flash.message}</div>
+		</g:if>
 		<div id="show-topic" class="content scaffold-show" role="main">
+			
 			<g:if test="${topicInstance?.title}">
 			<h1><g:fieldValue bean="${topicInstance}" field="title"/></h1>
 			</g:if>	
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			
+			<div id="tags">
+			<g:if test="${topicInstance?.tags}">
+					<g:each in="${topicInstance.tags}" var="t">
+					<g:link controller="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link>
+					</g:each>
+			</g:if>
+			</div>
+			
+			</br>
+			<div id="question">		
+			<g:if test="${topicInstance?.question}">	
+			<g:fieldValue bean="${topicInstance}" field="question"/>
 			</g:if>
 			
-			<ol class="property-list topic">
-
-				<g:if test="${topicInstance?.question}">	
-				<div id="message">			
-				<g:fieldValue bean="${topicInstance}" field="question"/>
-				</div>
-				</g:if>
+			</br></br>
 				
+			<g:if test="${topicInstance?.author}">
+				<g:message code="topic.posted.label"  default="Posted by "/>
+				<g:link controller="user" action="show" id="${topicInstance?.author?.id}">${topicInstance?.author?.encodeAsHTML()}</g:link>
+				<g:message code="topic.date.intro"  default="at "/>
+				<g:formatDate  format="dd-MM-yyyy HH:mm" date="${topicInstance?.creationDate}" />
+			</g:if>
+			
+			</br>
+			
+			<g:if test="${session.user == topicInstance.author.id || session.moderator == true }">
+				<g:link class="edit" action="edit" resource="${topicInstance}"><g:message code="topic.edit.topic.label" default="Edit Topic" /></g:link>
+			</g:if>
+			</div>
+			</br></br>
+			
+			<g:if test="${topicInstance?.messages}">
+			
+				<g:each in="${topicInstance.getOrderedMessages()}" var="m">
+					<div id="messages">
+					${m?.encodeAsHTML()}
+					</br> </br>
+					<g:message code="topic.posted.label"  default="Posted by "/>
+					<g:link controller="user" action="show" id="${m?.author?.id}">${m?.author?.encodeAsHTML()}</g:link>
+					<g:message code="topic.date.intro"  default="at "/>
+					<g:formatDate  format="dd-MM-yyyy HH:mm" date="${m?.creationDate}" />
+					<g:message code="topic.rate.label" default="rated "/> ${m?.rate}
+					</br>
+					<div id="comments">
+					<g:each in="${m.getOrderedComments()}" var="c">
+					${c?.encodeAsHTML()}
+					</br>
+					</g:each>
+					</div>
+					</br>
+					<g:if test="${session.user == m.author.id || session.moderator == true }">
+						<g:link controller="message" action="edit" resource="${m}"><g:message code="default.button.edit.label" default="Edit Message" /></g:link>
+					</g:if>
+					<g:if test="${session.user != null }">
+					<g:link controller="comment" action="create" params="['message.id': m?.id]">${message(code: 'default.add.label', args: [message(code: 'comment.label', default: 'Comment')])}</g:link>
+					<g:link controller="message" action="upvote" resource="${m}"><g:message code="topic.button.upvote.label" default="Upvote" /></g:link>
+					<g:link controller="message" action="downvote" resource="${m}"><g:message code="topic.button.downvote.label" default="Downvote" /></g:link>
+					</g:if>
+					</br></br>
+					</div>
+					</g:each>
+					
 				
-				
-				<g:if test="${topicInstance?.author}">
-				<li class="fieldcontain">
-					<span id="author-label" class="property-label"><g:message code="topic.author.label" default="Author" /></span>
-					
-						<span class="property-value" aria-labelledby="author-label"><g:link controller="user" action="show" id="${topicInstance?.author?.id}">${topicInstance?.author?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
+			</g:if>
 			
 				
 			
-				<g:if test="${topicInstance?.messages}">
-				<li class="fieldcontain">
-					<span id="messages-label" class="property-label"><g:message code="topic.messages.label" default="Messages" /></span>
-					
-						<g:each in="${topicInstance.messages}" var="m">
-						<span class="property-value" aria-labelledby="messages-label"><g:link controller="message" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
 			
-				<g:if test="${topicInstance?.tags}">
-				<li class="fieldcontain">
-					<span id="tags-label" class="property-label"><g:message code="topic.tags.label" default="Tags" /></span>
-					
-						<g:each in="${topicInstance.tags}" var="t">
-						<span class="property-value" aria-labelledby="tags-label"><g:link controller="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-			
-			</ol>
 			<g:if test="${session.user != null}">
 			<g:link controller="message" action="create" params="['topic.id': topicInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'message.label', default: 'Message')])}</g:link>
 			</g:if>
-
-
-			<g:form url="[resource:topicInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:if test="${session.user == topicInstance.author.id || session.moderator == true }">
-					<g:link class="edit" action="edit" resource="${topicInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					</g:if>
-				</fieldset>
-			</g:form>
 		</div>
 	</body>
 </html>

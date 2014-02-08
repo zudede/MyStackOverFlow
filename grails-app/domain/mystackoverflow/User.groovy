@@ -14,6 +14,7 @@ class User {
 	boolean isAdmin;
 	boolean isBlocked;
 	int score;
+	Map<Tag, Integer> tagActivity = new HashMap<Tag, Integer>();
 	static hasMany = [rewards:Reward, topics:Topic, messages:Message, comments:Comment]
 	
     static constraints = { 
@@ -26,6 +27,6 @@ class User {
 
 	@Override
 	String toString() {
-		return ((name ?: "") + " " + (firstName ?: ""));
+		return ((pseudo ?: ""));
 	}
 }

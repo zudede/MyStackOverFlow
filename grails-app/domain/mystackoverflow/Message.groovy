@@ -1,6 +1,7 @@
 package mystackoverflow
 
 import java.util.Date;
+import java.util.List;
 
 class Message {
 	
@@ -14,6 +15,11 @@ class Message {
 		author nullable: true
     }
 	Message(){}
+	
+	public List<Comment> getOrderedComments () {
+		return comments.sort{it.creationDate}
+	}
+	
 	
 	@Override
 	String toString() {

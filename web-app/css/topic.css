@@ -10,6 +10,15 @@ h1 {
 	margin: 0.8em 0 0.3em 0;
 }
 
-#message {
-	margin-left: 5%;
+#question {
+	margin-left: 3%;
 }
+
+#messages {
+	margin-left: 6%;
+}
+
+#comments {
+	margin-left: 10%;
+}
+

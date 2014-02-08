@@ -8,6 +8,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class MessageController {
 
+	def rewardDistributorService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -33,8 +34,10 @@ class MessageController {
             notFound()
             return
         }
-
-		messageInstance.author = User.get(session["user"])
+		User user = User.get(session["user"])
+		Topic topic = messageInstance.topic
+		messageInstance.author = user
+		messageInstance.creationDate = new Date()
 		messageInstance.rate = 0
 		messageInstance.validate()
 		
@@ -42,21 +45,35 @@ class MessageController {
             respond messageInstance.errors, view:'create'
             return
         }
-
-        messageInstance.save flush:true
-
+		
+		messageInstance.save flush:true
+		//rewardDistributorService.updateActivity(user, topic)
         request.withFormat {
             form {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'messageInstance.label', default: 'Message'), messageInstance.id])
-                redirect messageInstance
+                //redirect messageInstance
+				redirect messageInstance.topic
             }
             '*' { respond messageInstance, [status: CREATED] }
         }
+		
     }
 
     def edit(Message messageInstance) {
         respond messageInstance
     }
+	
+	def upvote(Message messageInstance) {
+		++messageInstance.rate
+		messageInstance.save flush:true
+		redirect messageInstance.topic
+	}
+	
+	def downvote(Message messageInstance) {
+		--messageInstance.rate
+		messageInstance.save flush:true
+		redirect messageInstance.topic
+	}
 
     @Transactional
     def update(Message messageInstance) {
@@ -75,7 +92,7 @@ class MessageController {
         request.withFormat {
             form {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Message.label', default: 'Message'), messageInstance.id])
-                redirect messageInstance
+                redirect messageInstance.topic
             }
             '*'{ respond messageInstance, [status: OK] }
         }

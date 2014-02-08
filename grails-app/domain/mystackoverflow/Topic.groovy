@@ -12,6 +12,10 @@ class Topic {
     static constraints = {
     }
 	
+	public List<Message> getOrderedMessages () {
+		return messages.sort{-(it.rate)}
+	}
+	
 	@Override
 	String toString() {
 		return ((title ?: ""));

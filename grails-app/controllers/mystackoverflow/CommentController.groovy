@@ -20,7 +20,9 @@ class CommentController {
     }
 
     def create() {
-        respond new Comment(params)
+		Comment comment = new Comment(params)
+		comment.message = Message.get(params["message.id"])
+		respond(comment)
     }
 
     @Transactional
@@ -30,17 +32,25 @@ class CommentController {
             return
         }
 
+		User user = User.get(session["user"])
+		commentInstance.author = user
+		commentInstance.creationDate = new Date()
+		commentInstance.validate()
+		
+		
         if (commentInstance.hasErrors()) {
             respond commentInstance.errors, view:'create'
             return
         }
 
+		
+		
         commentInstance.save flush:true
 
         request.withFormat {
             form {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'commentInstance.label', default: 'Comment'), commentInstance.id])
-                redirect commentInstance
+                redirect commentInstance.message.topic
             }
             '*' { respond commentInstance, [status: CREATED] }
         }
@@ -67,7 +77,7 @@ class CommentController {
         request.withFormat {
             form {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Comment.label', default: 'Comment'), commentInstance.id])
-                redirect commentInstance
+                redirect commentInstance.message.topic
             }
             '*'{ respond commentInstance, [status: OK] }
         }

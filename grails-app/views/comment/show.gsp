@@ -59,15 +59,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${commentInstance?.rate}">
-				<li class="fieldcontain">
-					<span id="rate-label" class="property-label"><g:message code="comment.rate.label" default="Rate" /></span>
-					
-						<span class="property-value" aria-labelledby="rate-label"><g:fieldValue bean="${commentInstance}" field="rate"/></span>
-					
-				</li>
-				</g:if>
-			
 			</ol>
 			<g:form url="[resource:commentInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
