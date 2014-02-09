@@ -12,16 +12,16 @@
 			</g:if>
 	<g:form url="[resource:userInstance, action:'login']" >
 		<div>
-		<div class="label">
+		<div id="label">
 		<g:message code="authentication.login"/>
 		</div>
-		<div class="field">
+		<div id="field">
 		<g:textField name="login" size="27px" value="${userInstance?.login}"/> <br/>
 		</div>	
-		<div class="label">
+		<div id="label">
 		<g:message code="authentication.password"/>
 		</div>
-		<div class="field">	
+		<div id="field">	
 		<g:passwordField name="passwordHash" size="27px" value="${userInstance?.passwordHash}"/>	<br/>
 		</div> </br>
 		<g:if test="${authenticationFailed}">

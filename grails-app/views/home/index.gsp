@@ -9,8 +9,8 @@
 	<h1><g:message code="index.welcome"/></h1>
 	<g:form>
 	<div>
-	<div class="userList">
-	<g:link controller="User"><g:message code="index.listUser" default="User List"/></g:link>
+	<div id="userList">
+	<g:link controller="User"><g:message code="index.listUser"/></g:link>
 	</div>
 	<g:if test="${session.user != null }">
 	<div class="topic">
@@ -18,7 +18,7 @@
 	</div>
 	</g:if>
 	<g:if test="${session.user == null }">
-	<div class="create">
+	<div id="create">
 	<g:link controller="User" class="create" action="create"><g:message code="index.createUser"/></g:link>
 	</div>
 	<div class="log">
@@ -30,9 +30,8 @@
 	</g:else>
 	</div>
 	</g:form>
-	</br> </br> </br>
 	<div id="list-topic" class="content scaffold-list" role="main">
-			<h1><g:message code="home.topicList.Label" default="Topic List"/></h1>
+			<h1><g:message code="home.topicList.Label"/></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>

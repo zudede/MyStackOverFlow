@@ -28,6 +28,13 @@ h3 {
 	margin-bottom: 3%;
 }
 
+#messageInfo {
+	border-bottom: 1px solid #CCCCCC;
+	margin: 0.8em 1em 0.3em;
+	padding: 0 0.25em;
+	margin-bottom: 3%;
+}
+
 #authorQuestion {
 	margin-right: 10%;
 	text-align: right;
@@ -45,11 +52,27 @@ h3 {
 	float: left;
 }
 
+#editMessageButton {
+	text-align: left;
+	margin-left: 5%;
+	float: left;
+}
+
 #messages {
 	margin-left: 6%;
+	width: 80%;
+	margin-bottom: 3%;
 }
 
 #comments {
-	margin-left: 10%;
+	margin-left: 8%;
+	width: 85%;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-top-width: 1px;
+	border-top-style: dashed;
 }
 
+#commentsInfo {
+	text-align: right;
+}

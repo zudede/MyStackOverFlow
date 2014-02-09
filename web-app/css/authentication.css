@@ -10,16 +10,12 @@ h1 {
 	margin: 0.8em 0 0.3em 0;
 }
 
-.label {
-	/*width: 30%;
-    float: left;
-    text-align: right;
-    margin-left : 5px;*/
-    width: 10%;
+#label {
+    width: 15%;
     float: left;
     text-align: left;
 }
 
-.field {
+#field {
     width: 90%;
 }

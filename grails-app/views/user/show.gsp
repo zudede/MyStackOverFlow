@@ -22,24 +22,24 @@
 			</g:if>
 			<ol class="property-list user">
 				<g:if test="${userInstance.isBlocked==true}">
-					<h3><g:message code="user.blocked.label" default="This user is blocked" /></h3> 	
+					<h3><g:message code="user.blocked.label"/></h3> 	
 				</g:if>
 			
 			
 				<g:if test="${userInstance.isAdmin==true}">
 					<li class="fieldcontain">
-					<span id="role-label" class="property-label"><g:message code="user.role.label" default="Role" /></span>
+					<span id="role-label" class="property-label"><g:message code="user.role.label"/></span>
 					
-						<span class="property-value" aria-labelledby="role-label"><g:message code="user.role.admin" default="Administrator"/></span>
+						<span class="property-value" aria-labelledby="role-label"><g:message code="user.role.admin"/></span>
 					
 					</li>
 				</g:if>
 				<g:else>
 				<g:if test="${userInstance.isModerator==true}">
 					<li class="fieldcontain">
-					<span id="role-label" class="property-label"><g:message code="user.role.label" default="Role" /></span>
+					<span id="role-label" class="property-label"><g:message code="user.role.label"/></span>
 					
-						<span class="property-value" aria-labelledby="role-label"><g:message code="user.role.moderator" default="Moderator"/></span>
+						<span class="property-value" aria-labelledby="role-label"><g:message code="user.role.moderator"/></span>
 					
 					</li>
 				</g:if>
@@ -48,7 +48,7 @@
 				
 				<g:if test="${userInstance?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="user.name.label" default="Name" /></span>
+					<span id="name-label" class="property-label"><g:message code="user.name.label"/></span>
 					
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${userInstance}" field="name"/></span>
 					
@@ -57,7 +57,7 @@
 			
 				<g:if test="${userInstance?.firstName}">
 				<li class="fieldcontain">
-					<span id="firstName-label" class="property-label"><g:message code="user.firstName.label" default="First Name" /></span>
+					<span id="firstName-label" class="property-label"><g:message code="user.firstName.label"/></span>
 					
 						<span class="property-value" aria-labelledby="firstName-label"><g:fieldValue bean="${userInstance}" field="firstName"/></span>
 					
@@ -66,7 +66,7 @@
 			
 				<g:if test="${userInstance?.email}">
 				<li class="fieldcontain">
-					<span id="email-label" class="property-label"><g:message code="user.email.label" default="Email" /></span>
+					<span id="email-label" class="property-label"><g:message code="user.email.label"/></span>
 					
 						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${userInstance}" field="email"/></span>
 					
@@ -75,7 +75,7 @@
 			
 				<g:if test="${userInstance?.login}">
 				<li class="fieldcontain">
-					<span id="login-label" class="property-label"><g:message code="user.login.label" default="Login" /></span>
+					<span id="login-label" class="property-label"><g:message code="user.login.label"/></span>
 					
 						<span class="property-value" aria-labelledby="login-label"><g:fieldValue bean="${userInstance}" field="login"/></span>
 					
@@ -84,7 +84,7 @@
 			
 				<g:if test="${userInstance?.birthday}">
 				<li class="fieldcontain">
-					<span id="birthday-label" class="property-label"><g:message code="user.birthday.label" default="Birthday" /></span>
+					<span id="birthday-label" class="property-label"><g:message code="user.birthday.label"/></span>
 					
 						<span class="property-value" aria-labelledby="birthday-label"><g:formatDate format="dd-MM-yyyy" date="${userInstance?.birthday}" /></span>
 					
@@ -94,7 +94,7 @@
 			
 				<g:if test="${userInstance?.pseudo}">
 				<li class="fieldcontain">
-					<span id="pseudo-label" class="property-label"><g:message code="user.pseudo.label" default="Pseudo" /></span>
+					<span id="pseudo-label" class="property-label"><g:message code="user.pseudo.label"/></span>
 					
 						<span class="property-value" aria-labelledby="pseudo-label"><g:fieldValue bean="${userInstance}" field="pseudo"/></span>
 					
@@ -103,7 +103,7 @@
 				
 				<g:if test="${userInstance?.score}">
 				<li class="fieldcontain">
-					<span id="score-label" class="property-label"><g:message code="user.score.label" default="Score" /></span>
+					<span id="score-label" class="property-label"><g:message code="user.score.label"/></span>
 					
 						<span class="property-value" aria-labelledby="score-label"><g:fieldValue bean="${userInstance}" field="score"/></span>
 					
@@ -112,7 +112,7 @@
 			
 				<g:if test="${userInstance?.rewards}">
 				<li class="fieldcontain">
-					<span id="rewards-label" class="property-label"><g:message code="user.rewards.label" default="Rewards" /></span>
+					<span id="rewards-label" class="property-label"><g:message code="user.rewards.label"/></span>
 					
 						<g:each in="${userInstance.rewards}" var="r">
 						<span class="property-value" aria-labelledby="rewards-label">${r}</span>
@@ -124,7 +124,7 @@
 			
 				<g:if test="${userInstance?.topics}">
 				<li class="fieldcontain">
-					<span id="topics-label" class="property-label"><g:message code="user.topics.label" default="Topics" /></span>
+					<span id="topics-label" class="property-label"><g:message code="user.topics.label"/></span>
 					
 						<g:each in="${userInstance.topics}" var="t">
 						<span class="property-value" aria-labelledby="topics-label"><g:link controller="topic" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
@@ -135,7 +135,7 @@
 			
 				<g:if test="${userInstance?.messages}">
 				<li class="fieldcontain">
-					<span id="messages-label" class="property-label"><g:message code="user.messages.label" default="Messages" /></span>
+					<span id="messages-label" class="property-label"><g:message code="user.messages.label"/></span>
 					
 						<g:each in="${userInstance.messages}" var="m">
 						<span class="property-value" aria-labelledby="messages-label"><g:link controller="topic" action="show" id="${m.topic.id}">${m?.encodeAsHTML()}</g:link></span>
@@ -146,7 +146,7 @@
 				
 				<g:if test="${userInstance?.comments}">
 				<li class="fieldcontain">
-					<span id="comments-label" class="property-label"><g:message code="user.comments.label" default="Comments" /></span>
+					<span id="comments-label" class="property-label"><g:message code="user.comments.label"/></span>
 					
 						<g:each in="${userInstance.comments}" var="c">
 						<span class="property-value" aria-labelledby="comments-label"><g:link controller="topic" action="show" id="${c.message.topic.id}">${c?.encodeAsHTML()}</g:link></span>
