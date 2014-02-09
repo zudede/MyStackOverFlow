@@ -47,7 +47,7 @@ class MessageController {
         }
 		
 		messageInstance.save flush:true
-		//rewardDistributorService.updateActivity(user, topic)
+		rewardDistributorService.updateActivity(user, topic)
         request.withFormat {
             form {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'messageInstance.label', default: 'Message'), messageInstance.id])
@@ -64,12 +64,14 @@ class MessageController {
     }
 	
 	def upvote(Message messageInstance) {
+		messageInstance.registerCurrentUserVote(session["user"]);
 		++messageInstance.rate
 		messageInstance.save flush:true
 		redirect messageInstance.topic
 	}
 	
 	def downvote(Message messageInstance) {
+		messageInstance.registerCurrentUserVote(session["user"]);
 		--messageInstance.rate
 		messageInstance.save flush:true
 		redirect messageInstance.topic

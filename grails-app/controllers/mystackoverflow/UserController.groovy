@@ -13,7 +13,7 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
+	def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model:[userInstanceCount: User.count()]
     }
@@ -48,7 +48,7 @@ class UserController {
             '*' { respond userInstance, [status: CREATED] }
         }
     }
-
+	
     def edit(User userInstance) {
         respond userInstance
     }

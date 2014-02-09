@@ -9,9 +9,12 @@ class Comment {
 	static belongsTo = [author:User, message: Message]
     static constraints = {
     }
+	static mapping = {
+		body type: 'text'
+	}
 	
 	@Override
 	String toString() {
-		return ((body ?: ""));
+		return ((body ?: ""))
 	}
 }

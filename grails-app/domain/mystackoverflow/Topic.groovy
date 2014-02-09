@@ -12,6 +12,10 @@ class Topic {
     static constraints = {
     }
 	
+	static mapping = {
+		question type: 'text'
+	}
+	
 	public List<Message> getOrderedMessages () {
 		return messages.sort{-(it.rate)}
 	}

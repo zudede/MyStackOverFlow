@@ -14,8 +14,7 @@ class User {
 	boolean isAdmin;
 	boolean isBlocked;
 	int score;
-	Map<Tag, Integer> tagActivity = new HashMap<Tag, Integer>();
-	static hasMany = [rewards:Reward, topics:Topic, messages:Message, comments:Comment]
+	static hasMany = [rewards:Reward, topics:Topic, messages:Message, comments:Comment, tagActivity:TagActivity]
 	
     static constraints = { 
 		name blank: false

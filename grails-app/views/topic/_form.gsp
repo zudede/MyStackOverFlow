@@ -21,7 +21,6 @@
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'question', 'error')} ">
 	<label for="question">
 		<g:message code="topic.question.label" default="Question" />
-		
 	</label>
 	<g:textArea name="question" value="${topicInstance?.question }"></g:textArea>
 	

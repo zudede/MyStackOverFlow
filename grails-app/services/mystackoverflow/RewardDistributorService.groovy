@@ -1,25 +1,35 @@
 package mystackoverflow
 
+import java.net.Authenticator.RequestorType;
+
 import grails.transaction.Transactional
 import mystackoverflow.User
+
 
 @Transactional
 class RewardDistributorService {
 
+	def messageSource
 	def updateActivity(User user, Topic topic) {
 		for (Tag tag : topic.tags) {
-			if (user.tagActivity.get(tag) == null) {
-				user.tagActivity.put(tag, 1);
+			TagActivity ta = TagActivity.findByUserAndTag(user, tag)
+			if (ta == null) {
+				ta =  new TagActivity()
+				ta.user = user;
+				ta.tag = tag;
+				ta.score = 1;
 			}
 			else {
-				++user.tagActivity.get(tag);
+				++ta.score;
 			}
-			//checkRewards(user, tag)
+			ta.save(flush:true);
+			checkRewards(ta)
 		}
+		user.save(flush:true)
 	}
 	
-	def checkRewards(User user, Tag tag) {
-		checkSimpleReward(user, tag)
+	def checkRewards(TagActivity ta) {
+		checkSimpleReward(ta)
 		/*switch (tag.name) {
 			case "iOs" :
 				break;
@@ -52,33 +62,33 @@ class RewardDistributorService {
 		}*/
 	}
 	
-	private checkSimpleReward(User user, Tag tag) {
-		if ([10, 20, 30, 50, 100].contains(user.tagActivity.get(tag))) {
+	private checkSimpleReward(TagActivity ta) {
+		if ([10, 20, 30, 50, 100].contains(ta.score)) {
 			Reward reward = new Reward()
-			reward.name = rewardConstructor(tag.name, user.tagActivity[tag]);
-			reward.points = 10
-			user.rewards.add(reward)
-			user.score += reward.points
+			reward.name = rewardNameConstructor(ta);
+			reward.points = ta.score
+			ta.user.rewards.add(reward)
+			ta.user.score += 10
 		}
 	}
 	
-	private String rewardConstructor(String title, int points) {
+	private String rewardNameConstructor(TagActivity ta) {
 		String result;
-		switch(points) {
+		switch(ta.score) {
 			case 10 :
-				result = message(code: 'reward.ten.points', args: [title])
+				result = "Jar-Jar-Binks " + ta.tag.name;
 				break;
 			case 20 :
-				result = message(code: 'reward.twenty.points', args: [title])
+				result = "Padawan " + ta.tag.name;
 				break;
 			case 30 :
-				result = message(code: 'reward.thirty.points', args: [title])
+				result = "Jedi " + ta.tag.name;
 				break;
 			case 50 :
-				result = message(code: 'reward.fifty.points', args: [title])
+				result = "Obi-Wan " + ta.tag.name;
 				break;
 			case 100:
-				result = message(code: 'reward.hundred.points', args: [title])
+				result = "Yoda " + ta.tag.name;
 				break;
 			
 		}

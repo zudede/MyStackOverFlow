@@ -26,6 +26,15 @@
 			<h1><g:fieldValue bean="${topicInstance}" field="title"/></h1>
 			</g:if>	
 			
+			</br>
+			<div id="question">		
+			<g:if test="${topicInstance?.question}">	
+			${topicInstance?.question}
+			<!--<g:fieldValue bean="${topicInstance}" field="question"/> -->
+			</g:if>
+			</div>
+			<div id="questionInfo">	
+			<div id="authorQuestion">
 			<div id="tags">
 			<g:if test="${topicInstance?.tags}">
 					<g:each in="${topicInstance.tags}" var="t">
@@ -33,35 +42,31 @@
 					</g:each>
 			</g:if>
 			</div>
-			
-			</br>
-			<div id="question">		
-			<g:if test="${topicInstance?.question}">	
-			<g:fieldValue bean="${topicInstance}" field="question"/>
+			<div id="editButton">	
+			<g:if test="${session.user == topicInstance.author.id || session.moderator == true }">
+				<g:link class="edit" action="edit" resource="${topicInstance}"><g:message code="topic.edit.topic.label" default="Edit Topic" /></g:link>
 			</g:if>
-			
-			</br></br>
-				
+			</div>
 			<g:if test="${topicInstance?.author}">
 				<g:message code="topic.posted.label"  default="Posted by "/>
 				<g:link controller="user" action="show" id="${topicInstance?.author?.id}">${topicInstance?.author?.encodeAsHTML()}</g:link>
 				<g:message code="topic.date.intro"  default="at "/>
 				<g:formatDate  format="dd-MM-yyyy HH:mm" date="${topicInstance?.creationDate}" />
 			</g:if>
-			
+			</div>
 			</br>
-			
-			<g:if test="${session.user == topicInstance.author.id || session.moderator == true }">
-				<g:link class="edit" action="edit" resource="${topicInstance}"><g:message code="topic.edit.topic.label" default="Edit Topic" /></g:link>
+			<g:if test="${topicInstance?.messages.size() != 0 }">
+			<h3><g:message code="topic.answers.label"  args="${topicInstance?.messages.size()}"/></h3>
 			</g:if>
 			</div>
-			</br></br>
 			
 			<g:if test="${topicInstance?.messages}">
 			
 				<g:each in="${topicInstance.getOrderedMessages()}" var="m">
+					<section>
 					<div id="messages">
 					${m?.encodeAsHTML()}
+					</div>
 					</br> </br>
 					<g:message code="topic.posted.label"  default="Posted by "/>
 					<g:link controller="user" action="show" id="${m?.author?.id}">${m?.author?.encodeAsHTML()}</g:link>
@@ -81,12 +86,16 @@
 					</g:if>
 					<g:if test="${session.user != null }">
 					<g:link controller="comment" action="create" params="['message.id': m?.id]">${message(code: 'default.add.label', args: [message(code: 'comment.label', default: 'Comment')])}</g:link>
+					<g:if test="${m.isNotVotedByCurrentUser(session.user)}">
 					<g:link controller="message" action="upvote" resource="${m}"><g:message code="topic.button.upvote.label" default="Upvote" /></g:link>
 					<g:link controller="message" action="downvote" resource="${m}"><g:message code="topic.button.downvote.label" default="Downvote" /></g:link>
 					</g:if>
+					</g:if>
 					</br></br>
-					</div>
+					
+					</section>
 					</g:each>
+					
 					
 				
 			</g:if>

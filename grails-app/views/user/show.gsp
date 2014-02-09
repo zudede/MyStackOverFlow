@@ -91,12 +91,43 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.comments}">
+			
+				<g:if test="${userInstance?.pseudo}">
 				<li class="fieldcontain">
-					<span id="comments-label" class="property-label"><g:message code="user.comments.label" default="Comments" /></span>
+					<span id="pseudo-label" class="property-label"><g:message code="user.pseudo.label" default="Pseudo" /></span>
 					
-						<g:each in="${userInstance.comments}" var="c">
-						<span class="property-value" aria-labelledby="comments-label"><g:link controller="topic" action="show" id="${c.message.topic.id}">${c?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="pseudo-label"><g:fieldValue bean="${userInstance}" field="pseudo"/></span>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${userInstance?.score}">
+				<li class="fieldcontain">
+					<span id="score-label" class="property-label"><g:message code="user.score.label" default="Score" /></span>
+					
+						<span class="property-value" aria-labelledby="score-label"><g:fieldValue bean="${userInstance}" field="score"/></span>
+					
+				</li>
+				</g:if>			
+			
+				<g:if test="${userInstance?.rewards}">
+				<li class="fieldcontain">
+					<span id="rewards-label" class="property-label"><g:message code="user.rewards.label" default="Rewards" /></span>
+					
+						<g:each in="${userInstance.rewards}" var="r">
+						<span class="property-value" aria-labelledby="rewards-label">${r}</span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
+			
+				<g:if test="${userInstance?.topics}">
+				<li class="fieldcontain">
+					<span id="topics-label" class="property-label"><g:message code="user.topics.label" default="Topics" /></span>
+					
+						<g:each in="${userInstance.topics}" var="t">
+						<span class="property-value" aria-labelledby="topics-label"><g:link controller="topic" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
@@ -112,42 +143,13 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${userInstance?.pseudo}">
+				
+				<g:if test="${userInstance?.comments}">
 				<li class="fieldcontain">
-					<span id="pseudo-label" class="property-label"><g:message code="user.pseudo.label" default="Pseudo" /></span>
+					<span id="comments-label" class="property-label"><g:message code="user.comments.label" default="Comments" /></span>
 					
-						<span class="property-value" aria-labelledby="pseudo-label"><g:fieldValue bean="${userInstance}" field="pseudo"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userInstance?.rewards}">
-				<li class="fieldcontain">
-					<span id="rewards-label" class="property-label"><g:message code="user.rewards.label" default="Rewards" /></span>
-					
-						<g:each in="${userInstance.rewards}" var="r">
-						<span class="property-value" aria-labelledby="rewards-label"><g:link controller="reward" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userInstance?.score}">
-				<li class="fieldcontain">
-					<span id="score-label" class="property-label"><g:message code="user.score.label" default="Score" /></span>
-					
-						<span class="property-value" aria-labelledby="score-label"><g:fieldValue bean="${userInstance}" field="score"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userInstance?.topics}">
-				<li class="fieldcontain">
-					<span id="topics-label" class="property-label"><g:message code="user.topics.label" default="Topics" /></span>
-					
-						<g:each in="${userInstance.topics}" var="t">
-						<span class="property-value" aria-labelledby="topics-label"><g:link controller="topic" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
+						<g:each in="${userInstance.comments}" var="c">
+						<span class="property-value" aria-labelledby="comments-label"><g:link controller="topic" action="show" id="${c.message.topic.id}">${c?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

@@ -30,7 +30,6 @@
 		
 	</div>
 		<g:actionSubmit value="${message(code:'createUser.submit')}" action="login"/> </br>
-		<g:link url="recoverId" ><g:message code="authentication.recover"/></g:link> <br/> <br/>
 		<g:link uri=""><g:message code="authentication.returnHome"/></g:link>
 	</g:form>
 	</body>
