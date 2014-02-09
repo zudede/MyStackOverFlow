@@ -44,7 +44,7 @@ class CommentController {
         }
 
 		
-		
+		log.info String.format("New comment created by %s", user)
         commentInstance.save flush:true
 
         request.withFormat {

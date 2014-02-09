@@ -45,7 +45,7 @@ class MessageController {
             respond messageInstance.errors, view:'create'
             return
         }
-		
+		log.info String.format("New message created by %s", user)
 		messageInstance.save flush:true
 		rewardDistributorService.updateActivity(user, topic)
         request.withFormat {
@@ -64,6 +64,7 @@ class MessageController {
     }
 	
 	def upvote(Message messageInstance) {
+		log.info String.format("Message %s is upvoted", messageInstance)
 		messageInstance.registerCurrentUserVote(session["user"]);
 		++messageInstance.rate
 		messageInstance.save flush:true
@@ -71,6 +72,7 @@ class MessageController {
 	}
 	
 	def downvote(Message messageInstance) {
+		log.info String.format("Message %s is downvoted", messageInstance)
 		messageInstance.registerCurrentUserVote(session["user"]);
 		--messageInstance.rate
 		messageInstance.save flush:true

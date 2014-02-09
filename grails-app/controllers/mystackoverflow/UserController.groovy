@@ -38,6 +38,7 @@ class UserController {
             return
         }
 
+		log.info "New user created"
         userInstance.save flush:true
 
         request.withFormat {
@@ -100,6 +101,7 @@ class UserController {
 	}
 	
 	def disconnect() {
+		log.info "Disconnect"
 		session["user"]=null
 		session["moderator"]=null
 		session["administrator"]=null
@@ -113,6 +115,7 @@ class UserController {
 		if(user) {
 			if (user.isBlocked)
 			{
+				log.info String.format("user %s is blocked", user)
 				request.withFormat {
 					form {
 						flash.message = message(code:'user.isblocked')	
@@ -121,13 +124,14 @@ class UserController {
 				}
 			}
 			else if (password.equals(user.passwordHash)) {
-				//connexion
+				log.info String.format("User %s is connected", user)
 				session["user"]=user.id
 				session["moderator"]=user.isModerator
 				session["administrator"]=user.isAdmin
 				redirect uri:""
 			}
 			else {
+				log.info "Wrong Password"
 				request.withFormat {
 					form {
 						flash.message = message(code:'user.wrongPassword')

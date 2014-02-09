@@ -45,7 +45,7 @@ class TopicController {
             return
         }
 
-		
+		log.info String.format("New topic created by %s", author)
         topicInstance.save flush:true
 
         request.withFormat {

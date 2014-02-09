@@ -35,6 +35,7 @@ class TagController {
             return
         }
 
+		log.info "New tag created "
         tagInstance.save flush:true
 
         request.withFormat {
